@@ -13,6 +13,7 @@ class TodoInput extends React.Component {
   }
   handleSubmit(e) {
     e.preventDefault();
+    this.props.onSubmitEvent(this.state.value);
     this.setState({ value: "" });
   }
   render() {
