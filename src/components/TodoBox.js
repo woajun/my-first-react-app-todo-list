@@ -9,11 +9,13 @@ class TodoBox extends React.Component {
     this.state = { todos: [] };
     this.addTodo = this.addTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
+    this.finishTodo = this.finishTodo.bind(this);
   }
   addTodo(aTodo) {
     const todo = {
       content: aTodo,
       key: this.getKey(),
+      finish: false,
       from: new Date(),
       to: null,
     };
@@ -23,6 +25,15 @@ class TodoBox extends React.Component {
     const filtered = this.state.todos.filter((e) => e.key !== key);
     this.setState({ todos: filtered });
   }
+  finishTodo(key) {
+    const mapped = this.state.todos.map((e) => {
+      if (e.key === key) {
+        e.finish = !e.finish;
+      }
+      return e;
+    });
+    this.setState({ todos: mapped });
+  }
   getKey() {
     return this.key++;
   }
@@ -31,8 +42,10 @@ class TodoBox extends React.Component {
       <TodoItem
         key={e.key}
         content={e.content}
-        onDeleteEvent={this.removeTodo}
         id={e.key}
+        finish={e.finish}
+        onDeleteEvent={this.removeTodo}
+        onSuccessEvent={this.finishTodo}
       />
     ));
     return (
