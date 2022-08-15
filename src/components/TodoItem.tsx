@@ -20,7 +20,7 @@ class TodoItem extends React.Component {
 
     return (
       <div className="mt-2 py-3 px-4 block w-full border-2 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 shadow-sm">
-        <label class={this.props.finish ? "line-through" : ""}>
+        <label className={this.props.finish ? "line-through" : ""}>
           {this.props.content}
         </label>
         <span className="float-right">
