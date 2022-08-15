@@ -1,17 +1,24 @@
 import React from "react";
 
-class TodoInput extends React.Component {
-  constructor(props) {
+interface Props {
+  onSubmitEvent:(aTodo: string)=>void,
+}
+
+interface State {
+  value: string
+}
+class TodoInput extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = { value: "apple" };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-  handleChange(e) {
-    this.setState({ value: e.target.value });
+  handleChange(e: React.FormEvent<HTMLInputElement>) {
+    this.setState({ value: e.currentTarget.value });
   }
-  handleSubmit(e) {
+  handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     this.props.onSubmitEvent(this.state.value);
     this.setState({ value: "" });

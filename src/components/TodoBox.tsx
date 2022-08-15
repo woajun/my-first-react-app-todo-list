@@ -2,17 +2,28 @@ import React from "react";
 import TodoInput from "./TodoInput";
 import TodoItem from "./TodoItem";
 
-class TodoBox extends React.Component {
+type Todo = {
+  content: string,
+  key: number,
+  finish: boolean,
+  from: Date,
+  to: Date|null
+}
+interface State {
+  todos: Todo[]
+}
+
+class TodoBox extends React.Component<{}, State> {
   key = 0;
-  constructor(props) {
+  constructor(props: {}) {
     super(props);
     this.state = { todos: [] };
     this.addTodo = this.addTodo.bind(this);
     this.removeTodo = this.removeTodo.bind(this);
     this.finishTodo = this.finishTodo.bind(this);
   }
-  addTodo(aTodo) {
-    const todo = {
+  addTodo(aTodo: string) {
+    const todo: Todo = {
       content: aTodo,
       key: this.getKey(),
       finish: false,
@@ -21,11 +32,11 @@ class TodoBox extends React.Component {
     };
     this.setState({ todos: [...this.state.todos, todo] });
   }
-  removeTodo(key) {
+  removeTodo(key: number) {
     const filtered = this.state.todos.filter((e) => e.key !== key);
     this.setState({ todos: filtered });
   }
-  finishTodo(key) {
+  finishTodo(key: number) {
     const mapped = this.state.todos.map((e) => {
       if (e.key === key) {
         e.finish = !e.finish;

@@ -1,7 +1,19 @@
 import React from "react";
 
-class TodoItem extends React.Component {
-  constructor(props) {
+interface Props {
+  content: string,
+  id: number, 
+  finish: boolean,
+  onDeleteEvent: (key: number)=>void,
+  onSuccessEvent: (key: number)=> void,
+}
+
+interface State {
+
+}
+
+class TodoItem extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
 
     this.handleDelete = this.handleDelete.bind(this);

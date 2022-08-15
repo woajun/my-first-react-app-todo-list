@@ -13,3 +13,4 @@
 ## 사용 의존성
 
 ### tailwind
+### typescript
